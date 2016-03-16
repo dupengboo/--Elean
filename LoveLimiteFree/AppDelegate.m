@@ -10,7 +10,7 @@
 #import "NewFeatureViewController.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic,strong) UIImageView * niceView;
 @end
 
 @implementation AppDelegate
@@ -23,9 +23,51 @@
     [_window makeKeyAndVisible];
     
     [self chooseRootController];
+    //圖片擴大淡出的效果开始;
+    
+    //设置一个图片;
+    _niceView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _niceView.tag=11;
+    _niceView.image = [UIImage imageNamed:@"Default1.png"];
+    
+    //添加到场景
+    [self.window addSubview:_niceView];
+    
+    //放到最顶层;
+    [self.window bringSubviewToFront:_niceView];
+    
+    CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    _niceView.layer.anchorPoint = CGPointMake(0.5,0.5);
+    animation.fromValue = @1.0f;
+    animation.toValue = @1.3f;
+    animation.fillMode=kCAFillModeForwards;
+    
+    
+    animation.removedOnCompletion = NO;
+    
+    [animation setAutoreverses:NO];
+    
+    //动画时间
+    animation.duration=5;
+    animation.delegate=self;
+    
+    [_niceView.layer addAnimation:animation forKey:@"scale"];
+    
+    
+    //结束;
     
     return YES;
+    
 }
+
+
+
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    [_niceView removeFromSuperview];
+    
+}
+
 #pragma mark------判断是否是新版本
 - (void)chooseRootController {
     //判断是否是最新版本
