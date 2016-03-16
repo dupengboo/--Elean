@@ -28,9 +28,7 @@
 #import "NSString+category.h"
 
 
-
-
-
-
+//常用的宏
+#define SCREEN_SIZE [UIScreen mainScreen].bounds
 
 #endif

@@ -7,7 +7,11 @@
 //
 
 #import "AppDelegate.h"
+//自己的引导图
 #import "NewFeatureViewController.h"
+#import "TabBarController.h"
+//老师封装的引导图
+#import "GuidanceController.h"
 
 @interface AppDelegate ()
 @property (nonatomic,strong) UIImageView * niceView;
@@ -23,6 +27,13 @@
     [_window makeKeyAndVisible];
     
     [self chooseRootController];
+    [self createStartAnimation];
+
+    return YES;
+    
+}
+#pragma mark-----添加启动动画
+- (void)createStartAnimation {
     //圖片擴大淡出的效果开始;
     
     //设置一个图片;
@@ -52,19 +63,67 @@
     animation.delegate=self;
     
     [_niceView.layer addAnimation:animation forKey:@"scale"];
-    
-    
     //结束;
-    
-    return YES;
-    
 }
-
-
-
+#pragma mark---移除动画
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     [_niceView removeFromSuperview];
+    
+}
+#pragma mark -- 创建tabBarController
+- (TabBarController *)createTabBarController{
+    NSArray *titles = @[@"限免", @"降价", @"免费", @"专题", @"热榜"];
+    
+    NSArray *normalImages = @[@"tabbar_limitfree.png", @"tabbar_reduceprice.png", @"tabbar_appfree.png", @"tabbar_subject.png", @"tabbar_rank.png"];
+    
+    NSArray *selectImages = @[@"tabbar_limitfree_press.png", @"tabbar_reduceprice_press.png", @"tabbar_appfree_press.png", @"tabbar_subject_press.png", @"tabbar_rank_press.png"];
+    
+    UIColor *normalColor = [UIColor lightGrayColor];
+    
+    UIColor *selectColor = [UIColor colorWithRed:87/255.0 green:152/255.0 blue:225/255.0 alpha:1.0];
+    //87 152 225
+    
+    
+    NSArray *controllers = @[@"LimiteFreeController", @"ReducePriceController", @"FreeViewController", @"SubjectController", @"HotViewController"];
+    
+    
+    
+    TabBarController *tabBar = [[TabBarController alloc]initWithTitles:titles andNormalImages:normalImages andSelectImages:selectImages andNormalColor:normalColor andSelectColor:selectColor andControllers:controllers];
+    
+    [tabBar setTabBar];
+    //设置tabBar的效果
+    
+    [tabBar setControllers];
+    //创建管理的控制器
+    
+    tabBar.selectedIndex = 0;
+    //设置默认选中的控制器
+    
+    [tabBar setTabBarBackground:@"tabbar_bg.png"];
+    //设置tabBar背景
+    
+    return tabBar;
+}
+
+#pragma mark -- create guidance 引导页面（老师）
+- (GuidanceController *)createGuidance{
+    
+    
+    NSArray *images = @[@"helpphoto_one.png", @"helpphoto_two.png", @"helpphoto_three.png", @"helpphoto_four.png",@"helpphoto_five.png"];
+    
+    MyBlock block = ^(void){
+        
+        //回调的之后  修改根控制器为tabBarController
+        self.window.rootViewController = [self createTabBarController];
+        
+        [self.window makeKeyAndVisible];
+    };
+    
+    GuidanceController *guidance = [[GuidanceController alloc]initWithImages:images andBlock:block];
+    
+    return guidance;
+    
     
 }
 
@@ -81,12 +140,12 @@
     
     if ([lastVersion isEqualToString:currentVerison]) {
         [UIApplication sharedApplication].statusBarHidden = NO;
-        UIViewController *ctr =  [Factory createControllerWithName:@"LimiteFreeController"];
 
-        [UIApplication sharedApplication].keyWindow.rootViewController = ctr;
+        [UIApplication sharedApplication].keyWindow.rootViewController = [self createTabBarController];
     }else  {
-        //     显示新版本特性
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[NewFeatureViewController alloc]init];
+//        //     显示新版本特性（自己的页面）
+//        [UIApplication sharedApplication].keyWindow.rootViewController = [[NewFeatureViewController alloc]init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [self createGuidance];
         //        存储新版本
         [defaults setObject:currentVerison forKey:versionKey];
         [defaults synchronize];
