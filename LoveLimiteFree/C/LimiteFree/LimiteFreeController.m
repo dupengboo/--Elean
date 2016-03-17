@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"限免";
+    self.view.backgroundColor = [UIColor redColor];
     // Do any additional setup after loading the view.
     
   NSURL *url =  [BaseHttpClient httpType:GET andURL:[NSString stringWithFormat:API_LIMITEFREE, 1]andParam:nil andSuccessBlock:^(NSURL *URL, id data) {

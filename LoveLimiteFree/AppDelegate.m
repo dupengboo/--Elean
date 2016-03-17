@@ -13,6 +13,10 @@
 //老师封装的引导图
 #import "GuidanceController.h"
 
+//网络监测以及提示框
+#import "AJNotificationView.h"
+#import "SVProgressHUD.h"
+
 @interface AppDelegate ()
 @property (nonatomic,strong) UIImageView * niceView;
 @end
@@ -152,6 +156,41 @@
     }
     
 }
+#pragma mark - 循环检测网络连接状态
+
+-(void)monitorNetworkStatus
+{
+    //1. 创建对象 通过不断的去请求百度的地址来检测网络状态
+    Reachability * reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+    
+    //2. 注册通知 监听网络状态
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    //3. 开始监听 如果网络状态发生变化 则触发通知方法
+    [reach startNotifier];
+    
+    
+}
+
+#pragma mark -- 网络状态改变触发的通知方法
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability * reach = [note object];
+    
+    if([reach isReachable])
+    {
+        NSLog(@"Notification Says Reachable");
+    }
+    else
+    {
+        NSLog(@"Notification Says Unreachable");
+        [self showNoticeMsg:@"无网络连接，请检查网络" WithInterval:2.0f];
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -174,5 +213,104 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+#pragma mark - 全局提示信息
 
+//提示网络状态（不带block）
+-(void)showNoticeMsg:(NSString *)msg WithInterval:(float)timer
+{
+    [AJNotificationView showNoticeInView:self.window
+                                    type:AJNotificationTypeBlue
+                                   title:msg
+                         linedBackground:AJLinedBackgroundTypeAnimated
+                               hideAfter:timer
+                                response:^{
+                                    // NSLog(@"Response block");
+                                }];
+}
+//提示网络状态（带block）
+-(void)showNoticeMsg:(NSString *)msg WithInterval:(float)timer Block:(void (^)(void))response
+{
+    [AJNotificationView showNoticeInView:self.window
+                                    type:AJNotificationTypeBlue
+                                   title:msg
+                         linedBackground:AJLinedBackgroundTypeAnimated
+                               hideAfter:timer offset:0.0f delay:0.0f detailDisclosure:YES
+                                response:response];
+}
+
+//提示正在提交
+-(void)showLoading:(NSString *)msg
+{
+    NSString *content;
+    
+    if (msg==nil) {
+        content=@"正在提交数据，请稍后…"; //正在提交数据，请稍后…
+    }
+    else
+    {
+        content=msg;
+    }
+    
+    [SVProgressHUD showWithStatus:content maskType:SVProgressHUDMaskTypeClear];
+}
+
+//关闭提示
+-(void)hideLoading
+{
+    [SVProgressHUD dismiss];
+}
+
+//提示成功信息 并在几秒后自动关闭
+-(void)hideLoadingWithSuc:(NSString *)msg WithInterval:(float)timer
+{
+    [SVProgressHUD dismissWithSuccess:msg afterDelay:timer];
+}
+
+//提示错误信息 并在几秒后自动关闭
+-(void)hideLoadingWithErr:(NSString *)msg WithInterval:(float)timer
+{
+    [SVProgressHUD dismissWithError:msg afterDelay:timer];
+}
+
+//提示成功
+-(void)showSucMsg:(NSString *)msg WithInterval:(float)timer
+{
+    NSString *content;
+    
+    if (msg==nil) {
+        content=@"成功"; //成功
+    }
+    else
+    {
+        content=msg;
+    }
+    
+    [SVProgressHUD show];
+    [SVProgressHUD dismissWithSuccess:content afterDelay:timer];
+}
+
+//提示失败
+-(void)showErrMsg:(NSString *)msg WithInterval:(float)timer
+{
+    NSString *content = nil;
+    
+    if (msg==nil) {
+        content = @"失败";  //失败
+    }
+    else
+    {
+        content = msg;
+    }
+    
+    [SVProgressHUD show];
+    [SVProgressHUD dismissWithError:content afterDelay:timer];
+}
+
+//提示网络错误
+- (void)showNetworkError
+{
+    [SVProgressHUD show];
+    [SVProgressHUD dismissWithError:@"网络错误" afterDelay:1.5];
+
+}
 @end

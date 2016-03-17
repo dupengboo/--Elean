@@ -12,6 +12,9 @@
 		4E3FA8931C9980AD003EDCF5 /* TabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FA88B1C9980AD003EDCF5 /* TabBarItem.m */; };
 		4E3FA8941C9980AD003EDCF5 /* TabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FA88D1C9980AD003EDCF5 /* TabBarModel.m */; };
 		4E3FA8951C9980AD003EDCF5 /* GuidanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FA8901C9980AD003EDCF5 /* GuidanceController.m */; };
+		4E3FA89D1C9A3D30003EDCF5 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FA8981C9A3D30003EDCF5 /* AJNotificationView.m */; };
+		4E3FA89E1C9A3D30003EDCF5 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E3FA89A1C9A3D30003EDCF5 /* SVProgressHUD.bundle */; };
+		4E3FA89F1C9A3D30003EDCF5 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FA89C1C9A3D30003EDCF5 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4EEAA3251C983ADE00CCBE93 /* NewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEAA3241C983ADE00CCBE93 /* NewFeatureViewController.m */; };
 		A500C5391C97A9CD00EA7E88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A500C5381C97A9CD00EA7E88 /* main.m */; };
 		A500C53C1C97A9CD00EA7E88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A500C53B1C97A9CD00EA7E88 /* AppDelegate.m */; };
@@ -251,6 +254,11 @@
 		4E3FA88D1C9980AD003EDCF5 /* TabBarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarModel.m; sourceTree = "<group>"; };
 		4E3FA88F1C9980AD003EDCF5 /* GuidanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidanceController.h; sourceTree = "<group>"; };
 		4E3FA8901C9980AD003EDCF5 /* GuidanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidanceController.m; sourceTree = "<group>"; };
+		4E3FA8971C9A3D30003EDCF5 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
+		4E3FA8981C9A3D30003EDCF5 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
+		4E3FA89A1C9A3D30003EDCF5 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		4E3FA89B1C9A3D30003EDCF5 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		4E3FA89C1C9A3D30003EDCF5 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		4EEAA3231C983ADE00CCBE93 /* NewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureViewController.h; sourceTree = "<group>"; };
 		4EEAA3241C983ADE00CCBE93 /* NewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureViewController.m; sourceTree = "<group>"; };
 		A500C5331C97A9CD00EA7E88 /* LoveLimiteFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveLimiteFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -593,6 +601,25 @@
 			path = Guidance;
 			sourceTree = "<group>";
 		};
+		4E3FA8961C9A3D30003EDCF5 /* AJNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				4E3FA8971C9A3D30003EDCF5 /* AJNotificationView.h */,
+				4E3FA8981C9A3D30003EDCF5 /* AJNotificationView.m */,
+			);
+			path = AJNotificationView;
+			sourceTree = "<group>";
+		};
+		4E3FA8991C9A3D30003EDCF5 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				4E3FA89A1C9A3D30003EDCF5 /* SVProgressHUD.bundle */,
+				4E3FA89B1C9A3D30003EDCF5 /* SVProgressHUD.h */,
+				4E3FA89C1C9A3D30003EDCF5 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		4EEAA3221C983AA800CCBE93 /* NewFeature */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +651,8 @@
 		A500C5351C97A9CD00EA7E88 /* LoveLimiteFree */ = {
 			isa = PBXGroup;
 			children = (
+				4E3FA8961C9A3D30003EDCF5 /* AJNotificationView */,
+				4E3FA8991C9A3D30003EDCF5 /* SVProgressHUD */,
 				4E3FA8861C9980AD003EDCF5 /* CustomTabbar */,
 				4E3FA88E1C9980AD003EDCF5 /* Guidance */,
 				A500C7731C97FE8700EA7E88 /* Reachability */,
@@ -1440,6 +1469,7 @@
 				A500C6E51C97AE7700EA7E88 /* buttonbar_action@2x.png in Resources */,
 				A500C7021C97AE7700EA7E88 /* category_Weather.jpg in Resources */,
 				A500C7201C97AE7700EA7E88 /* navigationbar.png in Resources */,
+				4E3FA89E1C9A3D30003EDCF5 /* SVProgressHUD.bundle in Resources */,
 				A500C72B1C97AE7700EA7E88 /* tabbar_bg.png in Resources */,
 				A500C6EA1C97AE7700EA7E88 /* cate_list_bg.png in Resources */,
 				A500C7531C97AE7700EA7E88 /* helpphoto_four.png in Resources */,
@@ -1532,6 +1562,7 @@
 				4E3FA8951C9980AD003EDCF5 /* GuidanceController.m in Sources */,
 				A500C5B31C97AB2100EA7E88 /* AFHTTPRequestOperation.m in Sources */,
 				A500C5C11C97AB2100EA7E88 /* JSONAPI.m in Sources */,
+				4E3FA89F1C9A3D30003EDCF5 /* SVProgressHUD.m in Sources */,
 				A500C5BB1C97AB2100EA7E88 /* AFURLSessionManager.m in Sources */,
 				A500C6061C97AB5A00EA7E88 /* MJRefreshFooter.m in Sources */,
 				A500C5BA1C97AB2100EA7E88 /* AFURLResponseSerialization.m in Sources */,
@@ -1565,6 +1596,7 @@
 				A500C5B41C97AB2100EA7E88 /* AFHTTPRequestOperationManager.m in Sources */,
 				A500C60B1C97AB5A00EA7E88 /* MJRefreshBackGifFooter.m in Sources */,
 				A500C6131C97AB5A00EA7E88 /* UIScrollView+MJExtension.m in Sources */,
+				4E3FA89D1C9A3D30003EDCF5 /* AJNotificationView.m in Sources */,
 				A500C5BC1C97AB2100EA7E88 /* JSONModel.m in Sources */,
 				A500C5B61C97AB2100EA7E88 /* AFNetworkReachabilityManager.m in Sources */,
 				A500C5391C97A9CD00EA7E88 /* main.m in Sources */,
